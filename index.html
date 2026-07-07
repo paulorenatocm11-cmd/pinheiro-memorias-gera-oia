@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Pinheiro em Memórias — Exposição Virtual</title>
+<meta content="Exposição virtual dos patrimônios históricos, culturais, religiosos e ambientais de Pinheiro, Maranhão." name="description"/>
+<style>
+:root{
+  --azul:#0c3a5d; --verde:#204f35; --verde2:#2f6b44; --dourado:#b47b2b; --creme:#f6f1e7; --texto:#1d2433; --claro:#fffaf0;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Georgia, 'Times New Roman', serif;color:var(--texto);background:linear-gradient(180deg,#f7f1e7,#fffaf3)}
+body, button, input{font-size:16px}
+a{color:inherit}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(12,58,93,.94);backdrop-filter:blur(8px);color:white;box-shadow:0 4px 20px rgba(0,0,0,.18)}
+.topbar .inner{max-width:1180px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:12px 20px}
+.brand{font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-family:Arial, sans-serif}
+nav{display:flex;gap:10px;flex-wrap:wrap;font-family:Arial, sans-serif;font-size:.82rem}
+nav a{text-decoration:none;padding:8px 10px;border:1px solid rgba(255,255,255,.22);border-radius:999px}
+nav a:hover{background:white;color:var(--azul)}
+.cover{min-height:86vh;display:grid;place-items:center;text-align:center;color:white;position:relative;overflow:hidden;background:#123}
+.cover::before{content:"";position:absolute;inset:0;background:url('ativos/apa_paisagem.jpg') center/cover no-repeat;filter:saturate(1.08) contrast(1.02)}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,35,50,.86),rgba(5,35,50,.35),rgba(20,50,35,.72))}
+.cover-content{position:relative;z-index:1;max-width:980px;padding:48px 20px}
+.cover .eyebrow{font-family:Arial,sans-serif;text-transform:uppercase;letter-spacing:.22em;font-weight:700;color:#e9d9a8}
+h1{font-size:clamp(3rem,9vw,8rem);line-height:.88;margin:20px 0 0;letter-spacing:.03em;text-transform:uppercase;text-shadow:0 4px 24px rgba(0,0,0,.28)}
+.script{display:block;font-style:italic;text-transform:none;font-size:clamp(2.4rem,7vw,6rem);color:#d9efd4;margin-top:4px}
+.subtitle{font-size:clamp(1.2rem,2.6vw,2.1rem);font-weight:700;margin:18px auto 0;max-width:760px}
+.cover p{font-family:Arial,sans-serif;line-height:1.6;max-width:780px;margin:28px auto}
+.cta{display:inline-flex;gap:10px;align-items:center;text-decoration:none;padding:14px 22px;background:#fff;color:var(--azul);border-radius:999px;font-family:Arial,sans-serif;font-weight:800;box-shadow:0 10px 26px rgba(0,0,0,.24)}
+main{max-width:1180px;margin:auto;padding:34px 20px 80px}
+.panel{background:rgba(255,255,255,.76);border:1px solid rgba(32,79,53,.18);border-radius:24px;box-shadow:0 16px 40px rgba(36,44,36,.08);padding:26px;margin:24px 0}
+.intro-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}
+.intro-grid img{width:100%;border-radius:20px;box-shadow:0 10px 28px rgba(0,0,0,.13)}
+h2{font-size:clamp(2rem,4vw,3.8rem);color:var(--azul);margin:.2em 0}
+h3{font-size:1.45rem;color:var(--verde);margin:0 0 12px}
+p,li{line-height:1.7}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+.kpi{background:var(--creme);border-radius:18px;padding:18px;text-align:center;border:1px solid rgba(180,123,43,.22)}
+.kpi strong{display:block;font-size:2.3rem;color:var(--verde);font-family:Arial,sans-serif}
+.section-title{display:flex;gap:16px;align-items:center;margin:46px 0 20px}
+.section-title span{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--verde);color:white;font:bold 1.3rem Arial}
+.section-title p{font-family:Arial,sans-serif;text-transform:uppercase;letter-spacing:.18em;color:var(--dourado);font-weight:800;margin:0}
+.section-title h2{margin:0}
+.room-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.room-card{text-decoration:none;background:#fff;border-radius:20px;overflow:hidden;border:1px solid rgba(12,58,93,.18);box-shadow:0 10px 26px rgba(0,0,0,.08);position:relative;transition:.22s transform,.22s box-shadow}
+.room-card:hover{transform:translateY(-6px);box-shadow:0 18px 36px rgba(0,0,0,.14)}
+.room-card img{width:100%;height:210px;object-fit:cover;display:block}
+.room-card div{padding:18px}
+.room-card p{margin:0;color:#4c5565}
+.badge{position:absolute;top:14px;left:14px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:var(--verde);color:white;font:bold 1.1rem Arial;box-shadow:0 4px 12px rgba(0,0,0,.24)}
+.hero-room{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch}
+.hero-room>img{width:100%;height:100%;min-height:430px;object-fit:cover;border-radius:24px;box-shadow:0 14px 34px rgba(0,0,0,.15);cursor:pointer}
+.room-text{background:#fff;border-radius:24px;padding:26px;border:1px solid rgba(12,58,93,.12)}
+.room-text h4{font-family:Arial,sans-serif;color:var(--azul);margin:18px 0 6px}
+.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.buttons a{text-decoration:none;background:var(--azul);color:#fff;border-radius:999px;padding:10px 14px;font:700 .9rem Arial}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+.gallery figure{margin:0;background:#fff;border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,.08)}
+.gallery img,.extra-card img{width:100%;height:210px;object-fit:cover;display:block;cursor:pointer}
+.gallery figcaption{padding:10px 12px;font:.85rem Arial;color:#4c5565}
+.extra-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.extra-card{background:#fff;border-radius:20px;overflow:hidden;border:1px solid rgba(32,79,53,.16);box-shadow:0 10px 26px rgba(0,0,0,.07)}
+.extra-card div{padding:16px}
+.map-box{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.map-list{display:grid;gap:10px}
+.map-list a{text-decoration:none;background:#fff;border:1px solid rgba(12,58,93,.14);border-radius:14px;padding:14px;font-family:Arial,sans-serif;font-weight:700}
+.map-list a::before{content:'📍 ';}
+.timeline{position:relative;padding-left:24px}
+.timeline::before{content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--dourado)}
+.timeline p{position:relative;margin:0 0 18px}
+.timeline p::before{content:"";position:absolute;left:-23px;top:8px;width:12px;height:12px;background:var(--verde);border-radius:50%;border:2px solid #fff}
+.tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tech-card{background:var(--creme);padding:20px;border-radius:18px;border:1px solid rgba(180,123,43,.22)}
+blockquote{margin:26px 0;padding:28px;border-left:6px solid var(--verde);background:#fff;border-radius:14px;font-size:1.5rem;line-height:1.45;color:var(--azul);font-style:italic}
+footer{background:var(--verde);color:white;padding:32px 20px;text-align:center}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:100;padding:24px}
+.lightbox img{max-width:96vw;max-height:88vh;border-radius:12px}
+.lightbox button{position:absolute;top:18px;right:18px;background:#fff;border:0;border-radius:999px;width:42px;height:42px;font-size:22px;cursor:pointer}
+@media(max-width:960px){.intro-grid,.hero-room,.map-box{grid-template-columns:1fr}.room-grid{grid-template-columns:repeat(2,1fr)}.gallery,.extra-grid,.tech-grid,.kpis{grid-template-columns:repeat(2,1fr)}nav{display:none}}
+@media(max-width:600px){main{padding:22px 12px 60px}.panel{padding:18px;border-radius:18px}.room-grid,.gallery,.extra-grid,.tech-grid,.kpis{grid-template-columns:1fr}.cover{min-height:78vh}.topbar .inner{justify-content:center}.brand{font-size:.84rem}.hero-room>img{min-height:300px}}
+@media print{.topbar,.buttons,.lightbox{display:none!important}body{background:white}.panel,.room-card,.extra-card{box-shadow:none}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="inner"><div class="brand">Pinheiro em Memórias</div><nav><a href="#sobre">Sobre</a><a href="#roteiro">Roteiro</a><a href="#sao-jose">01. Praça São José</a><a href="#parque-babacu">02. Parque do Babaçu</a><a href="#sao-benedito">03. Praça São Benedito</a><a href="#praca-familia">04. Praça da Família</a><a href="#obelisco-casaroes">05. Obelisco e Casarões Históricos</a><a href="#matriz">06. Praça da Matriz e Igreja de Santo Inácio</a><a href="#apa">07. APA da Baixada Maranhense e Rio Pericumã</a><a href="#praca-sarney">08. Praça Sarney</a><a href="#casa-sarney">09. Casa de Sarney</a><a href="#colegio-pinheirense">10. Colégio Pinheirense</a><a href="#fotos-extras">Extras</a><a href="#ficha">Ficha</a></nav></div></header>
+<section class="cover" id="inicio">
+<div class="cover-content">
+<div class="eyebrow">Exposição virtual</div>
+<h1>Pinheiro <span class="script">em Memórias</span></h1>
+<div class="subtitle">Patrimônio, Cultura e Tecnologia</div>
+<p>Um olhar dos estudantes sobre os espaços que contam histórias, preservam tradições e revelam as belezas da Princesa da Baixada.</p>
+<a class="cta" href="#sobre">Iniciar visita</a>
+</div>
+</section>
+<main>
+<section class="panel" id="sobre">
+<div class="intro-grid">
+<div>
+<div class="section-title" style="margin-top:0"><span>AI</span><div><p>Memória que inspira</p><h2>Sobre o projeto</h2></div></div>
+<p>Esta exposição virtual nasceu de um roteiro fotográfico pelos patrimônios históricos, culturais, religiosos e ambientais de Pinheiro, Maranhão. A proposta une fotografia, pesquisa, cultura digital e inteligência artificial para valorizar a memória local e estimular o protagonismo estudantil.</p>
+<p>As imagens foram organizadas como um museu digital: cada sala apresenta um patrimônio, sua importância, curiosidades e uma pequena galeria. A exposição pode ser acessada por link ou QR Code e compartilhada com a comunidade escolar.</p>
+<div class="kpis"><div class="kpi"><strong>10</strong>salas principais</div><div class="kpi"><strong>40+</strong>imagens tratadas</div><div class="kpi"><strong>9</strong>fotos extras</div><div class="kpi"><strong>2026</strong>ano do projeto</div></div>
+</div>
+<img alt="Cartaz da exposição Pinheiro em Memórias" onclick="openLightbox(this.src,this.alt)" src="ativos/poster.jpg"/>
+</div>
+</section>
+<section class="panel" id="roteiro">
+<div class="section-title"><span>☰</span><div><p>Mapa de visitação</p><h2>Roteiro da exposição</h2></div></div>
+<div class="map-box">
+<div class="map-list"><a href="#sao-jose">01. Praça São José</a><a href="#parque-babacu">02. Parque do Babaçu</a><a href="#sao-benedito">03. Praça São Benedito</a><a href="#praca-familia">04. Praça da Família</a><a href="#obelisco-casaroes">05. Obelisco e Casarões Históricos</a><a href="#matriz">06. Praça da Matriz e Igreja de Santo Inácio</a><a href="#apa">07. APA da Baixada Maranhense e Rio Pericumã</a><a href="#praca-sarney">08. Praça Sarney</a><a href="#casa-sarney">09. Casa de Sarney</a><a href="#colegio-pinheirense">10. Colégio Pinheirense</a></div>
+<div class="timeline">
+<p><strong>Saída:</strong> IEP — Instituto de Educação de Pinheiro.</p>
+<p><strong>Registro fotográfico:</strong> estudantes observam arquitetura, paisagem, símbolos religiosos, espaços de convivência e elementos naturais.</p>
+<p><strong>Tratamento digital:</strong> as imagens selecionadas recebem melhoria de cor, luz, nitidez e composição.</p>
+<p><strong>Exposição virtual:</strong> cada patrimônio torna-se uma sala online, com texto histórico, galeria e curiosidades.</p>
+<p><strong>Ampliação do roteiro:</strong> Praça Sarney, Casa de Sarney e Colégio Pinheirense foram incluídos como novas salas da exposição.</p></div>
+</div>
+</section>
+<section id="salas">
+<div class="section-title"><span>🏛</span><div><p>Nossos patrimônios</p><h2>Salas principais</h2></div></div>
+<div class="room-grid">
+<a class="room-card" href="#sao-jose">
+<span class="badge">01</span>
+<img alt="Praça São José" loading="lazy" src="ativos/sao_jose_igreja.jpg"/>
+<div><h3>Praça São José</h3><p>Um espaço de fé, educação e memória</p></div>
+</a>
+<a class="room-card" href="#parque-babacu">
+<span class="badge">02</span>
+<img alt="Parque do Babaçu" loading="lazy" src="ativos/parque_babacu_portal.jpg"/>
+<div><h3>Parque do Babaçu</h3><p>Onde a natureza, a cultura e a memória se encontram</p></div>
+</a>
+<a class="room-card" href="#sao-benedito">
+<span class="badge">03</span>
+<img alt="Praça São Benedito" loading="lazy" src="ativos/sao_benedito_igreja.jpg"/>
+<div><h3>Praça São Benedito</h3><p>Fé, tradição e convivência no coração de Pinheiro</p></div>
+</a>
+<a class="room-card" href="#praca-familia">
+<span class="badge">04</span>
+<img alt="Praça da Família" loading="lazy" src="ativos/familia_fonte.jpg"/>
+<div><h3>Praça da Família</h3><p>O encontro das gerações no coração de Pinheiro</p></div>
+</a>
+<a class="room-card" href="#obelisco-casaroes">
+<span class="badge">05</span>
+<img alt="Obelisco e Casarões Históricos" loading="lazy" src="ativos/obelisco.jpg"/>
+<div><h3>Obelisco e Casarões Históricos</h3><p>Pedras, fachadas e memórias da Princesa da Baixada</p></div>
+</a>
+<a class="room-card" href="#matriz">
+<span class="badge">06</span>
+<img alt="Praça da Matriz e Igreja de Santo Inácio" loading="lazy" src="ativos/matriz_fachada.jpg"/>
+<div><h3>Praça da Matriz e Igreja de Santo Inácio</h3><p>O berço espiritual da Princesa da Baixada</p></div>
+</a>
+<a class="room-card" href="#apa">
+<span class="badge">07</span>
+<img alt="APA da Baixada Maranhense e Rio Pericumã" loading="lazy" src="ativos/apa_canoas.jpg"/>
+<div><h3>APA da Baixada Maranhense e Rio Pericumã</h3><p>Onde a água, a cultura e a vida constroem a identidade pinheirense</p></div>
+</a><a class="room-card" href="#praca-sarney">
+<span class="badge">08</span>
+<img alt="Praça Sarney" loading="lazy" src="ativos/praca_sarney_2.jpg"/>
+<div><h3>Praça Sarney</h3><p>Convivência, memória urbana e identidade local</p></div>
+</a><a class="room-card" href="#casa-sarney">
+<span class="badge">09</span>
+<img alt="Casa de Sarney" loading="lazy" src="ativos/casa_sarney_1.jpg"/>
+<div><h3>Casa de Sarney</h3><p>Memória, história e patrimônio em Pinheiro</p></div>
+</a><a class="room-card" href="#colegio-pinheirense">
+<span class="badge">10</span>
+<img alt="Colégio Pinheirense" loading="lazy" src="ativos/colegio_pinheirense_2.jpg"/>
+<div><h3>Colégio Pinheirense</h3><p>Educação, tradição e memória da cidade</p></div>
+</a></div>
+</section>
+<section class="sala" id="sao-jose">
+<div class="section-title"><span>01</span><div><p>Sala da exposição</p><h2>Praça São José</h2></div></div>
+<div class="hero-room">
+<img alt="Praça São José" onclick="openLightbox(this.src, this.alt)" src="ativos/sao_jose_igreja.jpg"/>
+<div class="room-text">
+<h3>Um espaço de fé, educação e memória</h3>
+<p>A Praça São José reúne elementos religiosos, educacionais e comunitários que fazem parte da memória de Pinheiro. O conjunto formado pela Igreja São José, pelo Colégio Nossa Senhora do Sagrado Coração e pelo monumento ao Padre Luigi Risso fortalece o sentimento de pertencimento dos moradores.</p>
+<h4>O que observar</h4>
+<ul><li>Igreja São José como marco visual e religioso.</li><li>Colégio Nossa Senhora do Sagrado Coração como referência educacional.</li><li>Monumento ao Padre Luigi Risso como memória da atuação missionária e social.</li></ul>
+<h4>Curiosidades</h4>
+<ul><li>A fachada em pedras da igreja é um dos elementos arquitetônicos mais fotografados do bairro.</li><li>A praça une fé, educação e memória em um mesmo espaço urbano.</li><li>O local segue sendo ponto de convivência e celebração comunitária.</li></ul>
+<div class="buttons"><a href="#roteiro">Voltar ao roteiro</a><a href="#fotos-extras">Fotos extras</a></div>
+</div>
+</div>
+<div class="gallery"><figure><img alt="Praça São José" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/sao_jose_igreja.jpg"/><figcaption>Praça São José</figcaption></figure><figure><img alt="Praça São José" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/sj_fachada_original.jpg"/><figcaption>Praça São José</figcaption></figure><figure><img alt="Praça São José" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/sj_praca_original.jpg"/><figcaption>Praça São José</figcaption></figure><figure><img alt="Praça São José" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/sj_busto_original.jpg"/><figcaption>Praça São José</figcaption></figure></div>
+</section>
+<section class="sala" id="parque-babacu">
+<div class="section-title"><span>02</span><div><p>Sala da exposição</p><h2>Parque do Babaçu</h2></div></div>
+<div class="hero-room">
+<img alt="Parque do Babaçu" onclick="openLightbox(this.src, this.alt)" src="ativos/parque_babacu_portal.jpg"/>
+<div class="room-text">
+<h3>Onde a natureza, a cultura e a memória se encontram</h3>
+<p>O Parque do Babaçu é um espaço de lazer, encontro e valorização da paisagem natural de Pinheiro. Seu nome remete ao babaçu, palmeira de grande importância econômica, ambiental e cultural para o Maranhão e para a Baixada Maranhense.</p>
+<h4>O que observar</h4>
+<ul><li>Espaço público de convivência e lazer.</li><li>Presença simbólica do babaçu na identidade local.</li><li>Uso do parque em festividades, encontros e atividades culturais.</li></ul>
+<h4>Curiosidades</h4>
+<ul><li>O babaçu é conhecido popularmente como “árvore da vida”.</li><li>O parque une patrimônio natural e manifestações culturais.</li><li>Durante festas juninas, o espaço ganha forte presença de música, comidas típicas e decoração popular.</li></ul>
+<div class="buttons"><a href="#roteiro">Voltar ao roteiro</a><a href="#fotos-extras">Fotos extras</a></div>
+</div>
+</div>
+<div class="gallery"><figure><img alt="Parque do Babaçu" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/parque_babacu_portal.jpg"/><figcaption>Parque do Babaçu</figcaption></figure><figure><img alt="Parque do Babaçu" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/babacu_palmeiras.jpg"/><figcaption>Parque do Babaçu</figcaption></figure><figure><img alt="Parque do Babaçu" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/babacu_festa.jpg"/><figcaption>Parque do Babaçu</figcaption></figure><figure><img alt="Parque do Babaçu" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/babacu_palmeiras.jpg"/><figcaption>Parque do Babaçu</figcaption></figure></div>
+</section>
+<section class="sala" id="sao-benedito">
+<div class="section-title"><span>03</span><div><p>Sala da exposição</p><h2>Praça São Benedito</h2></div></div>
+<div class="hero-room">
+<img alt="Praça São Benedito" onclick="openLightbox(this.src, this.alt)" src="ativos/sao_benedito_igreja.jpg"/>
+<div class="room-text">
+<h3>Fé, tradição e convivência no coração de Pinheiro</h3>
+<p>A Praça São Benedito é um espaço de convivência ligado à religiosidade popular e à devoção a São Benedito. A igreja, a arborização e os caminhos internos da praça formam um ambiente de encontro, descanso e expressão da vida comunitária.</p>
+<h4>O que observar</h4>
+<ul><li>Igreja São Benedito como principal marco da praça.</li><li>Espaço verde utilizado para lazer e convivência.</li><li>Tradições religiosas associadas ao santo padroeiro.</li></ul>
+<h4>Curiosidades</h4>
+<ul><li>São Benedito é um santo de forte devoção popular no Maranhão.</li><li>A praça preserva a relação entre fé e cotidiano urbano.</li><li>O espaço mostra como a religião também organiza a memória dos bairros.</li></ul>
+<div class="buttons"><a href="#roteiro">Voltar ao roteiro</a><a href="#fotos-extras">Fotos extras</a></div>
+</div>
+</div>
+<div class="gallery"><figure><img alt="Praça São Benedito" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/sao_benedito_igreja.jpg"/><figcaption>Praça São Benedito</figcaption></figure><figure><img alt="Praça São Benedito" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/benedito_igreja_original.jpg"/><figcaption>Praça São Benedito</figcaption></figure><figure><img alt="Praça São Benedito" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/benedito_praca1.jpg"/><figcaption>Praça São Benedito</figcaption></figure></div>
+</section>
+<section class="sala" id="praca-familia">
+<div class="section-title"><span>04</span><div><p>Sala da exposição</p><h2>Praça da Família</h2></div></div>
+<div class="hero-room">
+<img alt="Praça da Família" onclick="openLightbox(this.src, this.alt)" src="ativos/familia_fonte.jpg"/>
+<div class="room-text">
+<h3>O encontro das gerações no coração de Pinheiro</h3>
+<p>A Praça da Família representa um importante espaço de lazer e socialização. Quadra, fonte, parque infantil, quiosques e áreas verdes demonstram sua função como ambiente de convivência entre crianças, jovens, adultos e idosos.</p>
+<h4>O que observar</h4>
+<ul><li>Área esportiva e recreativa para jovens.</li><li>Fonte e equipamentos urbanos como marcas da revitalização.</li><li>Espaço pensado para famílias e encontros comunitários.</li></ul>
+<h4>Curiosidades</h4>
+<ul><li>O espaço já passou por diferentes nomes e funções ao longo do tempo.</li><li>A praça conecta memória urbana e uso cotidiano.</li><li>É um lugar onde o patrimônio se manifesta também no brincar, no esporte e no encontro.</li></ul>
+<div class="buttons"><a href="#roteiro">Voltar ao roteiro</a><a href="#fotos-extras">Fotos extras</a></div>
+</div>
+</div>
+<div class="gallery"><figure><img alt="Praça da Família" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/familia_fonte.jpg"/><figcaption>Praça da Família</figcaption></figure><figure><img alt="Praça da Família" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/familia_quadra.jpg"/><figcaption>Praça da Família</figcaption></figure><figure><img alt="Praça da Família" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/familia_quadralateral.jpg"/><figcaption>Praça da Família</figcaption></figure><figure><img alt="Praça da Família" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/familia_fonte.jpg"/><figcaption>Praça da Família</figcaption></figure></div>
+</section>
+<section class="sala" id="obelisco-casaroes">
+<div class="section-title"><span>05</span><div><p>Sala da exposição</p><h2>Obelisco e Casarões Históricos</h2></div></div>
+<div class="hero-room">
+<img alt="Obelisco e Casarões Históricos" onclick="openLightbox(this.src, this.alt)" src="ativos/obelisco.jpg"/>
+<div class="room-text">
+<h3>Pedras, fachadas e memórias da Princesa da Baixada</h3>
+<p>O obelisco e os casarões históricos do centro de Pinheiro preservam sinais da formação urbana e social do município. As fachadas, janelas, portas, balcões e ornamentos narram diferentes épocas da cidade e revelam a importância da preservação patrimonial.</p>
+<h4>O que observar</h4>
+<ul><li>Obelisco como marco urbano e referência visual.</li><li>Casarões como testemunhos arquitetônicos do centro histórico.</li><li>Fachadas que revelam diferentes estilos e períodos da cidade.</li></ul>
+<h4>Curiosidades</h4>
+<ul><li>O obelisco funciona como símbolo de memória coletiva.</li><li>Os casarões mostram traços da arquitetura histórica maranhense.</li><li>A conservação desses bens ajuda a manter viva a história do município.</li></ul>
+<div class="buttons"><a href="#roteiro">Voltar ao roteiro</a><a href="#fotos-extras">Fotos extras</a></div>
+</div>
+</div>
+<div class="gallery"><figure><img alt="Obelisco e Casarões Históricos" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/obelisco.jpg"/><figcaption>Obelisco e Casarões Históricos</figcaption></figure><figure><img alt="Obelisco e Casarões Históricos" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/casarao_rosa.jpg"/><figcaption>Obelisco e Casarões Históricos</figcaption></figure><figure><img alt="Obelisco e Casarões Históricos" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/casarao_rosa.jpg"/><figcaption>Obelisco e Casarões Históricos</figcaption></figure><figure><img alt="Obelisco e Casarões Históricos" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/casarao2.jpg"/><figcaption>Obelisco e Casarões Históricos</figcaption></figure><figure><img alt="Obelisco e Casarões Históricos" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/obelisco_original.jpg"/><figcaption>Obelisco e Casarões Históricos</figcaption></figure></div>
+</section>
+<section class="sala" id="matriz">
+<div class="section-title"><span>06</span><div><p>Sala da exposição</p><h2>Praça da Matriz e Igreja de Santo Inácio</h2></div></div>
+<div class="hero-room">
+<img alt="Praça da Matriz e Igreja de Santo Inácio" onclick="openLightbox(this.src, this.alt)" src="ativos/matriz_fachada.jpg"/>
+<div class="room-text">
+<h3>O berço espiritual da Princesa da Baixada</h3>
+<p>A Igreja Matriz de Santo Inácio de Loyola é um dos principais símbolos religiosos e culturais de Pinheiro. A praça, o arco com imagem religiosa, as torres e os jardins compõem um conjunto de grande valor histórico, espiritual e afetivo para a população.</p>
+<h4>O que observar</h4>
+<ul><li>Igreja Matriz como referência religiosa e visual.</li><li>Arco monumental como símbolo de devoção e acolhimento.</li><li>Praça da Matriz como espaço de celebrações e encontros.</li></ul>
+<h4>Curiosidades</h4>
+<ul><li>A inscrição “Ad Maiorem Dei Gloriam” significa “Para a maior glória de Deus”.</li><li>As festividades religiosas fortalecem a identidade local.</li><li>A praça une arquitetura, natureza e espiritualidade.</li></ul>
+<div class="buttons"><a href="#roteiro">Voltar ao roteiro</a><a href="#fotos-extras">Fotos extras</a></div>
+</div>
+</div>
+<div class="gallery"><figure><img alt="Praça da Matriz e Igreja de Santo Inácio" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/matriz_fachada.jpg"/><figcaption>Praça da Matriz e Igreja de Santo Inácio</figcaption></figure><figure><img alt="Praça da Matriz e Igreja de Santo Inácio" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/matriz_arco.jpg"/><figcaption>Praça da Matriz e Igreja de Santo Inácio</figcaption></figure><figure><img alt="Praça da Matriz e Igreja de Santo Inácio" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/matriz1.jpg"/><figcaption>Praça da Matriz e Igreja de Santo Inácio</figcaption></figure><figure><img alt="Praça da Matriz e Igreja de Santo Inácio" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/matriz_arco1.jpg"/><figcaption>Praça da Matriz e Igreja de Santo Inácio</figcaption></figure><figure><img alt="Praça da Matriz e Igreja de Santo Inácio" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/matriz_praca.jpg"/><figcaption>Praça da Matriz e Igreja de Santo Inácio</figcaption></figure><figure><img alt="Praça da Matriz" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/benedito_praca2.jpg"/><figcaption>Praça da Matriz e seu entorno</figcaption></figure></div>
+</section>
+<section class="sala" id="apa">
+<div class="section-title"><span>07</span><div><p>Sala da exposição</p><h2>APA da Baixada Maranhense e Rio Pericumã</h2></div></div>
+<div class="hero-room">
+<img alt="APA da Baixada Maranhense e Rio Pericumã" onclick="openLightbox(this.src, this.alt)" src="ativos/apa_canoas.jpg"/>
+<div class="room-text">
+<h3>Onde a água, a cultura e a vida constroem a identidade pinheirense</h3>
+<p>A APA e o Rio Pericumã representam o patrimônio natural de Pinheiro. Campos alagados, canoas, embarcações, peixes, aves, plantas aquáticas e comunidades ribeirinhas revelam a ligação entre meio ambiente, cultura e sobrevivência na Baixada Maranhense.</p>
+<h4>O que observar</h4>
+<ul><li>Rio Pericumã como fonte de alimento, trabalho e identidade.</li><li>Campos alagados como ecossistemas de grande biodiversidade.</li><li>Canoas e embarcações como memória da cultura ribeirinha.</li></ul>
+<h4>Curiosidades</h4>
+<ul><li>Os ciclos das cheias e vazantes influenciam a vida local.</li><li>A pesca artesanal integra a economia e a cultura regional.</li><li>A preservação da APA é essencial para as futuras gerações.</li></ul>
+<div class="buttons"><a href="#roteiro">Voltar ao roteiro</a><a href="#fotos-extras">Fotos extras</a></div>
+</div>
+</div>
+<div class="gallery"><figure><img alt="APA da Baixada Maranhense e Rio Pericumã" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/apa_canoas.jpg"/><figcaption>APA da Baixada Maranhense e Rio Pericumã</figcaption></figure><figure><img alt="APA da Baixada Maranhense e Rio Pericumã" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/apa_paisagem.jpg"/><figcaption>APA da Baixada Maranhense e Rio Pericumã</figcaption></figure><figure><img alt="APA da Baixada Maranhense e Rio Pericumã" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/apa_paisagem.jpg"/><figcaption>APA da Baixada Maranhense e Rio Pericumã</figcaption></figure><figure><img alt="APA da Baixada Maranhense e Rio Pericumã" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/apa_barco_mensageiro.jpg"/><figcaption>APA da Baixada Maranhense e Rio Pericumã</figcaption></figure><figure><img alt="APA da Baixada Maranhense e Rio Pericumã" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/apa_panoramica.jpg"/><figcaption>APA da Baixada Maranhense e Rio Pericumã</figcaption></figure></div>
+</section>
+<section class="sala" id="colegio-pinheirense">
+<div class="section-title"><span>10</span><div><p>Sala da exposição</p><h2>Colégio Pinheirense</h2></div></div>
+<div class="hero-room">
+<img alt="Colégio Pinheirense" onclick="openLightbox(this.src, this.alt)" src="ativos/colegio_pinheirense_2.jpg"/>
+<div class="room-text">
+<h3>Educação, tradição e memória da cidade</h3>
+<p>O Colégio Pinheirense compõe a paisagem urbana e a memória educacional de Pinheiro. Sua presença representa a importância das instituições escolares na formação de gerações e na construção da identidade social da cidade.</p>
+<h4>O que observar</h4>
+<ul>
+<li>Fachada marcada pelas cores azul e branca.</li>
+<li>Nome da instituição destacado na parte superior do prédio.</li>
+<li>Arquitetura escolar integrada ao movimento do centro urbano.</li>
+</ul>
+<h4>Curiosidades</h4>
+<ul>
+<li>A escola é reconhecida como referência visual no centro de Pinheiro.</li>
+<li>Os registros mostram sua relação direta com as ruas e o comércio do entorno.</li>
+<li>Patrimônio escolar também é memória de estudantes, professores e famílias.</li>
+</ul>
+<div class="buttons"><a href="#roteiro">Voltar ao roteiro</a><a href="#fotos-extras">Fotos extras</a></div>
+</div>
+</div>
+<div class="gallery">
+<figure><img alt="Vista ampla do Colégio Pinheirense" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/colegio_pinheirense_2.jpg"/><figcaption>Vista ampla e entorno urbano</figcaption></figure>
+<figure><img alt="Fachada do Colégio Pinheirense" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/colegio_pinheirense_2.jpg"/><figcaption>Fachada principal da instituição</figcaption></figure>
+</div>
+</section><section class="sala" id="casa-sarney">
+<div class="section-title"><span>09</span><div><p>Sala da exposição</p><h2>Casa de Sarney</h2></div></div>
+<div class="hero-room">
+<img alt="Museu Casa de Sarney" onclick="openLightbox(this.src, this.alt)" src="ativos/casa_sarney_1.jpg"/>
+<div class="room-text">
+<h3>Memória, história e patrimônio em Pinheiro</h3>
+<p>A Casa de Sarney, atualmente identificada como museu, integra o conjunto de espaços de memória de Pinheiro. A edificação preserva características da arquitetura tradicional e possui valor simbólico para a história política e cultural do município.</p>
+<h4>O que observar</h4>
+<ul>
+<li>Fachada simples, portas, janelas e cobertura de telhas.</li>
+<li>Placa e identificação do Museu Casa de Sarney.</li>
+<li>Relação entre a edificação e o tecido urbano do entorno.</li>
+</ul>
+<h4>Curiosidades</h4>
+<ul>
+<li>O imóvel é apresentado como local de nascimento de José Sarney.</li>
+<li>O espaço associa memória familiar, história local e patrimônio.</li>
+<li>A conservação do prédio permite compreender aspectos da arquitetura de outra época.</li>
+</ul>
+<div class="buttons"><a href="#roteiro">Voltar ao roteiro</a><a href="#fotos-extras">Fotos extras</a></div>
+</div>
+</div>
+<div class="gallery">
+<figure><img alt="Fachada do Museu Casa de Sarney" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/casa_sarney_1.jpg"/><figcaption>Fachada e entrada principal</figcaption></figure>
+<figure><img alt="Museu Casa de Sarney visto pela rua" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/casa_sarney_2.jpg"/><figcaption>Vista lateral da edificação</figcaption></figure>
+<figure><img alt="Museu Casa de Sarney" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/casa_sarney_1.jpg"/><figcaption>Registro do museu e do entorno urbano</figcaption></figure>
+</div>
+</section><section class="sala" id="praca-sarney">
+<div class="section-title"><span>08</span><div><p>Sala da exposição</p><h2>Praça Sarney</h2></div></div>
+<div class="hero-room">
+<img alt="Praça Sarney" onclick="openLightbox(this.src, this.alt)" src="ativos/praca_sarney_2.jpg"/>
+<div class="room-text">
+<h3>Convivência, memória urbana e identidade local</h3>
+<p>A Praça Sarney integra a paisagem urbana de Pinheiro e funciona como espaço de circulação, descanso e encontro. Sua arborização, seus bancos, caminhos internos, relógio e monumento ajudam a registrar diferentes momentos da vida cotidiana da cidade.</p>
+<h4>O que observar</h4>
+<ul>
+<li>Árvores e áreas sombreadas que favorecem a convivência.</li>
+<li>Bancos, caminhos internos e equipamentos urbanos.</li>
+<li>Busto e relógio como elementos de referência e memória.</li>
+</ul>
+<h4>Curiosidades</h4>
+<ul>
+<li>A praça reúne marcas do uso cotidiano e da história urbana local.</li>
+<li>Os diferentes ângulos revelam sua organização espacial e paisagística.</li>
+<li>O espaço continua sendo ponto de passagem e encontro para a população.</li>
+</ul>
+<div class="buttons"><a href="#roteiro">Voltar ao roteiro</a><a href="#fotos-extras">Fotos extras</a></div>
+</div>
+</div>
+<div class="gallery">
+<figure><img alt="Busto na Praça Sarney" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/praca_sarney_busto.jpg"/><figcaption>Busto e área central da praça</figcaption></figure>
+<figure><img alt="Praça Sarney arborizada" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/praca_sarney_1.jpg"/><figcaption>Arborização, bancos e caminhos</figcaption></figure>
+<figure><img alt="Vista da Praça Sarney" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/praca_sarney_2.jpg"/><figcaption>Vista geral e relógio da praça</figcaption></figure>
+<figure><img alt="Área de lazer da Praça Sarney" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/praca_sarney_3.jpg"/><figcaption>Espaço de convivência e lazer</figcaption></figure>
+</div>
+</section><section class="panel" id="fotos-extras">
+<div class="section-title"><span>+</span><div><p>Olhares complementares</p><h2>Fotos extras</h2></div></div>
+<p>Esta seção reúne imagens complementares produzidas durante o percurso. Elas ampliam a narrativa da exposição, destacando detalhes da paisagem, da vida urbana, da religiosidade, da educação, da arte e da relação da cidade com as águas da Baixada Maranhense.</p>
+<div class="extra-grid">
+<article class="extra-card">
+<img alt="O Coração Verde da Cidade" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/extra_praca.jpg"/>
+<div><h3>O Coração Verde da Cidade</h3><p>As praças públicas revelam áreas de convivência, descanso e encontro entre gerações.</p></div>
+</article>
+<article class="extra-card">
+<img alt="Flores sobre as Águas" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/extra_flores_aguape.jpg"/>
+<div><h3>Flores sobre as Águas</h3><p>Os aguapés floridos destacam a beleza dos ecossistemas aquáticos da Baixada.</p></div>
+</article>
+<article class="extra-card">
+<img alt="Correntes da Memória" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/extra_correntes_canoas.jpg"/>
+<div><h3>Correntes da Memória</h3><p>Correntes, canoas e margens do rio simbolizam o trabalho e a pesca artesanal.</p></div>
+</article>
+<article class="extra-card">
+<img alt="Arte que Conta Histórias" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/extra_mural.jpg"/>
+<div><h3>Arte que Conta Histórias</h3><p>Murais urbanos transformam espaços públicos em lugares de memória e identidade.</p></div>
+</article>
+<article class="extra-card">
+<img alt="O Caminho para a Baixada" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/extra_caminho_baixada.jpg"/>
+<div><h3>O Caminho para a Baixada</h3><p>As ruas que conduzem aos campos aproximam a cidade da paisagem natural.</p></div>
+</article>
+<article class="extra-card">
+<img alt="Sob a Sombra das Árvores" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/extra_caminho_baixada.jpg"/>
+<div><h3>Sob a Sombra das Árvores</h3><p>A arborização garante acolhimento e qualidade de vida nos espaços públicos.</p></div>
+</article>
+<article class="extra-card">
+<img alt="Educação e Comunidade" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/extra_colegio.jpg"/>
+<div><h3>Educação e Comunidade</h3><p>Instituições escolares e religiosas ajudam a formar a história social da cidade.</p></div>
+</article>
+<article class="extra-card">
+<img alt="Silhuetas da Fé" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/extra_matriz_sombra.jpg"/>
+<div><h3>Silhuetas da Fé</h3><p>A luz do entardecer transforma a devoção em imagem de memória coletiva.</p></div>
+</article>
+<article class="extra-card">
+<img alt="Memória e Devoção Popular" loading="lazy" onclick="openLightbox(this.src, this.alt)" src="ativos/matriz_arco.jpg"/>
+<div><h3>Memória e Devoção Popular</h3><p>Pequenas capelas e monumentos preservam práticas religiosas de bairro.</p></div>
+</article></div>
+</section>
+<section class="panel" id="ia">
+<div class="section-title"><span>IA</span><div><p>Cultura digital</p><h2>Como a inteligência artificial foi usada</h2></div></div>
+<div class="tech-grid">
+<div class="tech-card"><h3>Tratamento visual</h3><p>As imagens foram melhoradas com ajustes de iluminação, cores, nitidez, contraste, céu e vegetação.</p></div>
+<div class="tech-card"><h3>Valorização do patrimônio</h3><p>A edição buscou destacar arquitetura, paisagem e elementos culturais, sem apagar o valor documental dos registros.</p></div>
+<div class="tech-card"><h3>Exposição online</h3><p>O acervo foi transformado em uma galeria virtual navegável, acessível por link e QR Code.</p></div>
+</div>
+</section>
+<section class="panel" id="encerramento">
+<div class="section-title"><span>♥</span><div><p>Encerramento</p><h2>Memória, identidade e futuro</h2></div></div>
+<p>Pinheiro não é feita apenas de ruas, praças, igrejas, rios e casarões. A cidade é construída por memórias, histórias, saberes populares, tradições religiosas, paisagens naturais e pelo olhar de quem aprende a reconhecer beleza no próprio território.</p>
+<blockquote>“Preservar a memória é construir o futuro sem esquecer as raízes que nos sustentam.”</blockquote>
+</section>
+<section class="panel" id="ficha">
+<div class="section-title"><span>i</span><div><p>Créditos</p><h2>Ficha técnica</h2></div></div>
+<p><strong>Projeto:</strong> Pinheiro em Memórias: Patrimônio, Cultura e Tecnologia</p>
+<p><strong>Instituição:</strong> UMI — Instituto de Educação de Pinheiro (IEP)</p>
+<p><strong>Eletiva:</strong> Geração IA: Aprender, Criar e Inovar</p>
+<p><strong>Professores responsáveis:</strong> Paulo Morais e Elisabeth Amate</p>
+<p><strong>Produção fotográfica:</strong> estudantes participantes do projeto</p>
+<p><strong>Edição e organização:</strong> recursos de Inteligência Artificial aplicados à educação patrimonial e cultura digital</p>
+<p><strong>Ano:</strong> 2026</p>
+</section>
+</main>
+<footer>
+<strong>Pinheiro em Memórias</strong><br/>Patrimônio, Cultura e Tecnologia<br/><small>Exposição virtual — UMI / IEP — 2026</small>
+</footer>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()"><button aria-label="Fechar" onclick="closeLightbox()">×</button><img alt="Imagem ampliada" id="lightboxImg"/></div>
+<script>
+function openLightbox(src, alt){
+  const box=document.getElementById('lightbox');
+  const img=document.getElementById('lightboxImg');
+  img.src=src; img.alt=alt||'Imagem ampliada'; box.style.display='flex';
+}
+function closeLightbox(){document.getElementById('lightbox').style.display='none'}
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeLightbox()});
+</script>
+</body>
+</html>
